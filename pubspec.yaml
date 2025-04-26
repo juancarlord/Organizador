@@ -1,0 +1,32 @@
+name: documento_organizador
+description: Aplicación para organizar documentos médicos por patrones de nombres.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  path_provider: ^2.1.0
+  file_picker: ^5.3.3
+  archive: ^3.3.7
+  path: ^1.8.3
+  provider: ^6.0.5
+  intl: ^0.18.1
+  url_launcher: ^6.2.5
+  logging: ^1.2.0
+  package_info_plus: ^5.0.1
+  http: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/logo.png
