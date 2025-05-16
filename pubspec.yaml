@@ -20,6 +20,7 @@ dependencies:
   logging: ^1.2.0
   package_info_plus: ^5.0.1
   http: ^1.1.0
+  msix: ^3.16.7
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +31,16 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo.png
+
+msix_config:
+  display_name: Documento Organizador
+  publisher_display_name: Your Company Name
+  identity_name: company.app.name
+  msix_version: 1.0.0.0
+  logo_path: assets/logo.png
+  certificate_path: C:\Dev\certificate.pfx
+  certificate_password: Thomas0506
+  architecture: x64
+  output_name: Organizador documentos
+  output_path: build/windows/appx
+  bundle: true

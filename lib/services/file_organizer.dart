@@ -42,7 +42,8 @@ class FileOrganizer {
     AppLogger.info('Output directory: $outputDirectory');
 
     // Check if this is a CAPRESOCA folder
-    final isCapresoca = sourceDirectory.toLowerCase().contains('capresoca');
+    //final isCapresoca = sourceDirectory.toLowerCase().contains('capresoca');
+    const isCapresoca = true;
     AppLogger.info('Is CAPRESOCA folder: $isCapresoca');
 
     // Create output directory if it doesn't exist
@@ -55,7 +56,9 @@ class FileOrganizer {
       'REPORTE',
       'FACTURA',
       'XML',
-      'JSON Y CUV'
+      'JSON Y CUV',
+      'VALIDACIONES',
+      'CARGOS'
     ];
 
     // Statistics
@@ -126,16 +129,11 @@ class FileOrganizer {
                 fileName.toLowerCase().endsWith('.json')) {
               final baseName =
                   _cleanFileName(path.basenameWithoutExtension(fileName));
-
               // CAPRESOCA-specific behavior: Handle _CUV files differently
-              if (baseName.endsWith('_CUV')) {
-                final matchName = baseName.replaceAll('_CUV', '');
-                folderName = jsonToDocumentNumber.containsKey(matchName)
-                    ? documentNumberToFolder[jsonToDocumentNumber[matchName]!]
-                    : null;
-              } else {
-                folderName = baseName;
-              }
+              final matchName = baseName.replaceAll('_CUV', '');
+              folderName = jsonToDocumentNumber.containsKey(matchName)
+                  ? documentNumberToFolder[jsonToDocumentNumber[matchName]!]
+                  : null;
             } else if (subfolder == 'REPORTE' ||
                 subfolder == 'AUTORIZACION Y ORDEN') {
               for (final entry in documentNumberToFolder.entries) {
@@ -154,6 +152,16 @@ class FileOrganizer {
                   break;
                 }
               }
+            } else if (subfolder == 'VALIDACIONES') {
+              // For VALIDACIONES, use MR number for organization
+              final match = RegExp(r'MR\d+').firstMatch(cleanFileName);
+              if (match != null) {
+                folderName = match.group(0);
+                final ext = path.extension(cleanFileName);
+                targetFileName =
+                    '${path.basenameWithoutExtension(cleanFileName)}_VLD$ext';
+                AppLogger.info('Found MR number $folderName in $cleanFileName');
+              }
             } else {
               final jsonFileName =
                   _cleanFileName(path.basenameWithoutExtension(fileName));
@@ -161,7 +169,9 @@ class FileOrganizer {
                   ? documentNumberToFolder[jsonToDocumentNumber[jsonFileName]!]
                   : null;
             }
-          } else {
+          }
+          /* 
+          else {
             // Non-CAPRESOCA behavior: Use MR number for organization
             // For XML and JSON Y CUV, the filename is just MRdigits
             if (subfolder == 'XML' || subfolder == 'JSON Y CUV') {
@@ -178,7 +188,7 @@ class FileOrganizer {
               }
             }
           }
-
+          */
           // Determine target directory
           String targetDir;
           if (folderName != null) {

@@ -33,6 +33,10 @@ class FileUtils {
       return 'XML';
     } else if (baseName.contains('cuv')) {
       return 'CUV';
+    } else if (baseName.contains('validacion')) {
+      return 'VALIDACIONES';
+    } else if (baseName.contains('cargos')) {
+      return 'CARGOS';
     }
 
     // Por defecto, basado en la extensión

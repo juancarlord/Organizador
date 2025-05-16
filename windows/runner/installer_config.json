@@ -1,0 +1,23 @@
+{
+    "app_name": "Documento Organizador",
+    "publisher": "Your Name",
+    "version": "1.0.0",
+    "description": "Aplicación para organizar documentos médicos por patrones de nombres",
+    "icon_path": "assets/logo.png",
+    "installer_icon_path": "assets/logo.png",
+    "installer_splash_image_path": "assets/logo.png",
+    "installer_license_path": "LICENSE",
+    "installer_web_page": "https://github.com/yourusername/documento_organizador",
+    "assets": [
+        {
+            "source": "assets/",
+            "target": "assets/"
+        }
+    ],
+    "start_menu_shortcut": true,
+    "desktop_shortcut": true,
+    "installer_arguments": {
+        "install_location": "C:\\Program Files\\Documento Organizador"
+    },
+    "build_directory": "build/windows/x64/runner/Release"
+}
