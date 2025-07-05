@@ -162,6 +162,16 @@ class FileOrganizer {
                     '${path.basenameWithoutExtension(cleanFileName)}_VLD$ext';
                 AppLogger.info('Found MR number $folderName in $cleanFileName');
               }
+            } else if (subfolder == 'FACTURA') {
+              // For VALIDACIONES, use MR number for organization
+              final match = RegExp(r'MR\d+').firstMatch(cleanFileName);
+              if (match != null) {
+                folderName = match.group(0);
+                final ext = path.extension(cleanFileName);
+                targetFileName =
+                    '${path.basenameWithoutExtension(cleanFileName)}_FCT$ext';
+                AppLogger.info('Found MR number $folderName in $cleanFileName');
+              }
             } else {
               final jsonFileName =
                   _cleanFileName(path.basenameWithoutExtension(fileName));
